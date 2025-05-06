@@ -209,16 +209,16 @@ HRESULT CSampleCredential::SetSelected(_Out_ BOOL *pbAutoLogon)
     {
         if (_pCredProvCredentialEvents)
         {
-            _pCredProvCredentialEvents->SetFieldState(this, SFI_PASSWORD, CPFS_HIDDEN, CPFIS_NONE);
-            _pCredProvCredentialEvents->SetFieldState(this, SFI_OTP_TEXT, CPFS_DISPLAY_IN_SELECTED_TILE, CPFIS_FOCUSED);
+            _pCredProvCredentialEvents->SetFieldState(this, SFI_PASSWORD, CPFS_HIDDEN);
+            _pCredProvCredentialEvents->SetFieldState(this, SFI_OTP_TEXT, CPFS_DISPLAY_IN_SELECTED_TILE);
         }
     }
     else
     {
         if (_pCredProvCredentialEvents)
         {
-            _pCredProvCredentialEvents->SetFieldState(this, SFI_PASSWORD, CPFS_DISPLAY_IN_SELECTED_TILE, CPFIS_FOCUSED);
-            _pCredProvCredentialEvents->SetFieldState(this, SFI_OTP_TEXT, CPFS_HIDDEN, CPFIS_NONE);
+            _pCredProvCredentialEvents->SetFieldState(this, SFI_PASSWORD, CPFS_DISPLAY_IN_SELECTED_TILE);
+            _pCredProvCredentialEvents->SetFieldState(this, SFI_OTP_TEXT, CPFS_HIDDEN);
         }
     }
 
@@ -525,12 +525,12 @@ HRESULT CSampleCredential::CommandLinkClicked(DWORD dwFieldID)
         case SFI_HIDECONTROLS_LINK:
             _pCredProvCredentialEvents->BeginFieldUpdates();
             cpfsShow = _fShowControls ? CPFS_DISPLAY_IN_SELECTED_TILE : CPFS_HIDDEN;
-            _pCredProvCredentialEvents->SetFieldState(this, SFI_FULLNAME_TEXT, cpfsShow, CPFIS_NONE);
-            _pCredProvCredentialEvents->SetFieldState(this, SFI_DISPLAYNAME_TEXT, cpfsShow, CPFIS_NONE);
-            _pCredProvCredentialEvents->SetFieldState(this, SFI_LOGONSTATUS_TEXT, cpfsShow, CPFIS_NONE);
-            _pCredProvCredentialEvents->SetFieldState(this, SFI_CHECKBOX, cpfsShow, CPFIS_NONE);
-            _pCredProvCredentialEvents->SetFieldState(this, SFI_EDIT_TEXT, cpfsShow, CPFIS_NONE);
-            _pCredProvCredentialEvents->SetFieldState(this, SFI_COMBOBOX, cpfsShow, CPFIS_NONE);
+            _pCredProvCredentialEvents->SetFieldState(this, SFI_FULLNAME_TEXT, cpfsShow);
+            _pCredProvCredentialEvents->SetFieldState(this, SFI_DISPLAYNAME_TEXT, cpfsShow);
+            _pCredProvCredentialEvents->SetFieldState(this, SFI_LOGONSTATUS_TEXT, cpfsShow);
+            _pCredProvCredentialEvents->SetFieldState(this, SFI_CHECKBOX, cpfsShow);
+            _pCredProvCredentialEvents->SetFieldState(this, SFI_EDIT_TEXT, cpfsShow);
+            _pCredProvCredentialEvents->SetFieldState(this, SFI_COMBOBOX, cpfsShow);
             _pCredProvCredentialEvents->SetFieldString(this, SFI_HIDECONTROLS_LINK, _fShowControls? L"Hide additional controls" : L"Show additional controls");
             _pCredProvCredentialEvents->EndFieldUpdates();
             _fShowControls = !_fShowControls;
@@ -688,8 +688,8 @@ HRESULT CSampleCredential::GetSerialization(_Out_ CREDENTIAL_PROVIDER_GET_SERIAL
             // Force field state update
             if (_pCredProvCredentialEvents)
             {
-                _pCredProvCredentialEvents->SetFieldState(this, SFI_PASSWORD, CPFS_HIDDEN, CPFIS_NONE);
-                _pCredProvCredentialEvents->SetFieldState(this, SFI_OTP_TEXT, CPFS_DISPLAY_IN_SELECTED_TILE, CPFIS_FOCUSED);
+                _pCredProvCredentialEvents->SetFieldState(this, SFI_PASSWORD, CPFS_HIDDEN);
+                _pCredProvCredentialEvents->SetFieldState(this, SFI_OTP_TEXT, CPFS_DISPLAY_IN_SELECTED_TILE);
                 _pCredProvCredentialEvents->SetFieldString(this, SFI_LARGE_TEXT, L"Enter One-Time Password");
             }
             
