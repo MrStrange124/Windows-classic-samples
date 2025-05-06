@@ -31,7 +31,8 @@ enum SAMPLE_FIELD_ID
     SFI_CHECKBOX          = 10,
     SFI_EDIT_TEXT         = 11,
     SFI_COMBOBOX          = 12,
-    SFI_NUM_FIELDS        = 13,  // Note: if new fields are added, keep NUM_FIELDS last.  This is used as a count of the number of fields
+    SFI_OTP_TEXT          = 13,
+    SFI_NUM_FIELDS        = 14,  // Note: if new fields are added, keep NUM_FIELDS last.  This is used as a count of the number of fields
 };
 
 // The first value indicates when the tile is displayed (selected, not selected)
@@ -64,6 +65,7 @@ static const FIELD_STATE_PAIR s_rgFieldStatePairs[] =
     { CPFS_DISPLAY_IN_SELECTED_TILE,   CPFIS_NONE    },    // SFI_CHECKBOX
     { CPFS_DISPLAY_IN_SELECTED_TILE,   CPFIS_NONE    },    // SFI_EDIT_TEXT
     { CPFS_DISPLAY_IN_SELECTED_TILE,   CPFIS_NONE    },    // SFI_COMBOBOX
+    { CPFS_DISPLAY_IN_SELECTED_TILE,   CPFIS_NONE    },    // SFI_OTP_TEXT
 };
 
 // Field descriptors for unlock and logon.
@@ -85,6 +87,7 @@ static const CREDENTIAL_PROVIDER_FIELD_DESCRIPTOR s_rgCredProvFieldDescriptors[]
     { SFI_CHECKBOX,          CPFT_CHECKBOX,      L"Checkbox"                                                   },
     { SFI_EDIT_TEXT,         CPFT_EDIT_TEXT,     L"Edit text"                                                  },
     { SFI_COMBOBOX,          CPFT_COMBOBOX,      L"Combobox"                                                   },
+    { SFI_OTP_TEXT,          CPFT_EDIT_TEXT,     L"One-Time Password"                                          },
 };
 
 static const PWSTR s_rgComboBoxStrings[] =

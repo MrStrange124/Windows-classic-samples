@@ -117,4 +117,6 @@ public:
     DWORD                                   _dwComboIndex;                                  // Tracks the current index of our combobox.
     bool                                    _fShowControls;                                 // Tracks the state of our show/hide controls link.
     bool                                    _fIsLocalUser;                                  // If the cred prov is assosiating with a local user tile
+    bool                                    _fShowingOTP;                                   // Tracks if we're showing the OTP input
+    bool                                    _fPasswordValidated;                            // Tracks if password was validated and OTP is next
 };
