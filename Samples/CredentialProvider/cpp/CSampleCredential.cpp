@@ -209,16 +209,16 @@ HRESULT CSampleCredential::SetSelected(_Out_ BOOL *pbAutoLogon)
     {
         if (_pCredProvCredentialEvents)
         {
-            _pCredProvCredentialEvents->SetFieldState(this, SFI_PASSWORD, CPFS_HIDDEN, CPFIS_NONE);
-            _pCredProvCredentialEvents->SetFieldState(this, SFI_OTP_TEXT, CPFS_DISPLAY_IN_SELECTED_TILE, CPFIS_FOCUSED);
+            _pCredProvCredentialEvents->SetFieldState(SFI_PASSWORD, CPFS_HIDDEN, CPFIS_NONE);
+            _pCredProvCredentialEvents->SetFieldState(SFI_OTP_TEXT, CPFS_DISPLAY_IN_SELECTED_TILE, CPFIS_FOCUSED);
         }
     }
     else
     {
         if (_pCredProvCredentialEvents)
         {
-            _pCredProvCredentialEvents->SetFieldState(this, SFI_PASSWORD, CPFS_DISPLAY_IN_SELECTED_TILE, CPFIS_FOCUSED);
-            _pCredProvCredentialEvents->SetFieldState(this, SFI_OTP_TEXT, CPFS_HIDDEN, CPFIS_NONE);
+            _pCredProvCredentialEvents->SetFieldState(SFI_PASSWORD, CPFS_DISPLAY_IN_SELECTED_TILE, CPFIS_FOCUSED);
+            _pCredProvCredentialEvents->SetFieldState(SFI_OTP_TEXT, CPFS_HIDDEN, CPFIS_NONE);
         }
     }
 
@@ -241,7 +241,7 @@ HRESULT CSampleCredential::SetDeselected()
 
         if (SUCCEEDED(hr) && _pCredProvCredentialEvents)
         {
-            _pCredProvCredentialEvents->SetFieldString(this, SFI_PASSWORD, _rgFieldStrings[SFI_PASSWORD]);
+            _pCredProvCredentialEvents->SetFieldString(SFI_PASSWORD, _rgFieldStrings[SFI_PASSWORD]);
         }
     }
 
@@ -525,13 +525,13 @@ HRESULT CSampleCredential::CommandLinkClicked(DWORD dwFieldID)
         case SFI_HIDECONTROLS_LINK:
             _pCredProvCredentialEvents->BeginFieldUpdates();
             cpfsShow = _fShowControls ? CPFS_DISPLAY_IN_SELECTED_TILE : CPFS_HIDDEN;
-            _pCredProvCredentialEvents->SetFieldState(nullptr, SFI_FULLNAME_TEXT, cpfsShow);
-            _pCredProvCredentialEvents->SetFieldState(nullptr, SFI_DISPLAYNAME_TEXT, cpfsShow);
-            _pCredProvCredentialEvents->SetFieldState(nullptr, SFI_LOGONSTATUS_TEXT, cpfsShow);
-            _pCredProvCredentialEvents->SetFieldState(nullptr, SFI_CHECKBOX, cpfsShow);
-            _pCredProvCredentialEvents->SetFieldState(nullptr, SFI_EDIT_TEXT, cpfsShow);
-            _pCredProvCredentialEvents->SetFieldState(nullptr, SFI_COMBOBOX, cpfsShow);
-            _pCredProvCredentialEvents->SetFieldString(nullptr, SFI_HIDECONTROLS_LINK, _fShowControls? L"Hide additional controls" : L"Show additional controls");
+            _pCredProvCredentialEvents->SetFieldState(SFI_FULLNAME_TEXT, cpfsShow);
+            _pCredProvCredentialEvents->SetFieldState(SFI_DISPLAYNAME_TEXT, cpfsShow);
+            _pCredProvCredentialEvents->SetFieldState(SFI_LOGONSTATUS_TEXT, cpfsShow);
+            _pCredProvCredentialEvents->SetFieldState(SFI_CHECKBOX, cpfsShow);
+            _pCredProvCredentialEvents->SetFieldState(SFI_EDIT_TEXT, cpfsShow);
+            _pCredProvCredentialEvents->SetFieldState(SFI_COMBOBOX, cpfsShow);
+            _pCredProvCredentialEvents->SetFieldString(SFI_HIDECONTROLS_LINK, _fShowControls? L"Hide additional controls" : L"Show additional controls");
             _pCredProvCredentialEvents->EndFieldUpdates();
             _fShowControls = !_fShowControls;
             break;
@@ -670,7 +670,7 @@ HRESULT CSampleCredential::GetSerialization(_Out_ CREDENTIAL_PROVIDER_GET_SERIAL
             *pcpsiOptionalStatusIcon = CPSI_ERROR;
             if (_pCredProvCredentialEvents)
             {
-                _pCredProvCredentialEvents->SetFieldString(this, SFI_OTP_TEXT, L"");
+                _pCredProvCredentialEvents->SetFieldString(SFI_OTP_TEXT, L"");
             }
             hr = S_OK;
         }
@@ -679,7 +679,7 @@ HRESULT CSampleCredential::GetSerialization(_Out_ CREDENTIAL_PROVIDER_GET_SERIAL
     {
         // We're in password validation mode
         // For RDP, we'll transition to OTP step instead of validating against the system
-        if (_cpus == CPUS_CREDUI || _cpus == CPUS_REMOTE_INTERACTIVE_LOGON)
+        if (_cpus == CPUS_CREDUI || _cpus == CPUS_LOGON)
         {
             // Switch to OTP mode
             _fShowingOTP = true;
@@ -688,9 +688,9 @@ HRESULT CSampleCredential::GetSerialization(_Out_ CREDENTIAL_PROVIDER_GET_SERIAL
             // Force field state update
             if (_pCredProvCredentialEvents)
             {
-                _pCredProvCredentialEvents->SetFieldState(this, SFI_PASSWORD, CPFS_HIDDEN, CPFIS_NONE);
-                _pCredProvCredentialEvents->SetFieldState(this, SFI_OTP_TEXT, CPFS_DISPLAY_IN_SELECTED_TILE, CPFIS_FOCUSED);
-                _pCredProvCredentialEvents->SetFieldString(this, SFI_LARGE_TEXT, L"Enter One-Time Password");
+                _pCredProvCredentialEvents->SetFieldState(SFI_PASSWORD, CPFS_HIDDEN, CPFIS_NONE);
+                _pCredProvCredentialEvents->SetFieldState(SFI_OTP_TEXT, CPFS_DISPLAY_IN_SELECTED_TILE, CPFIS_FOCUSED);
+                _pCredProvCredentialEvents->SetFieldString(SFI_LARGE_TEXT, L"Enter One-Time Password");
             }
             
             hr = S_OK;
@@ -847,12 +847,12 @@ HRESULT CSampleCredential::ReportResult(NTSTATUS ntsStatus,
     {
         if (_pCredProvCredentialEvents)
         {
-            _pCredProvCredentialEvents->SetFieldString(this, SFI_PASSWORD, L"");
+            _pCredProvCredentialEvents->SetFieldString(SFI_PASSWORD, L"");
             
             // Also clear OTP field if we're in OTP mode
             if (_fShowingOTP)
             {
-                _pCredProvCredentialEvents->SetFieldString(this, SFI_OTP_TEXT, L"");
+                _pCredProvCredentialEvents->SetFieldString(SFI_OTP_TEXT, L"");
             }
         }
     }
